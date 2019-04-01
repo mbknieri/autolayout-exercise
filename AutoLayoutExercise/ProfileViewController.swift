@@ -10,31 +10,63 @@ import UIKit
 
 class ProfileViewController: UIViewController {
     
-    private var profilePic = UIImageView(image: UIImage(named: "profile_pic"))
-    private var nameLabel = UILabel(frame: .zero)
+    private enum Constants {
+        static let nameLabelSize: CGFloat = 23.0
+        static let statusStackViewSpacing: CGFloat = 47.0
+        static let hometownStackViewSpacing: CGFloat = 12.0
+        static let bioStackViewSpacing: CGFloat = 50.0
+        static let mainStackViewSpacing: CGFloat = 8.0
+        static let profilePicAspectRatio: CGFloat = 1.0
+        static let profilePicHeightRatio: CGFloat = 0.30
+        static let profilePicToNameLabelSpacing: CGFloat = 20.0
+        static let nameLabelToMainStackViewSpacing: CGFloat = 20.0
+        static let mainStackViewLeadingSpacing: CGFloat = 30.0
+        static let mainStackViewTrailingSpacing: CGFloat = -30.0
+        static let mainStackViewBottomSpacing: CGFloat = 20.0
+        static let labelFontSize: CGFloat = 17.0
+    }
+    
+    private var profilePic: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "profile_pic"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private var nameLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "John Doe"
+        label.font = UIFont.systemFont(ofSize: Constants.nameLabelSize, weight: .semibold)
+        return label
+    }()
+    
     private var statusStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 47.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = Constants.statusStackViewSpacing
         return stackView
     }()
     
     private var hometownStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 47.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = Constants.hometownStackViewSpacing
         return stackView
     }()
     
     private var bioStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .top
-        stackView.spacing = 47.0
+        stackView.spacing = Constants.bioStackViewSpacing
         return stackView
     }()
     
     private var mainStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
-        stackView.spacing = 8.0
+        stackView.spacing = Constants.mainStackViewSpacing
         return stackView
     }()
     
@@ -69,31 +101,37 @@ private extension ProfileViewController {
         //Add constraints
         NSLayoutConstraint.activate([
             //Profile Pic Constraints
-            profilePic.widthAnchor.constraint(equalTo: profilePic.heightAnchor, multiplier: 1.0 / 1.0),
-            profilePic.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
+            profilePic.widthAnchor.constraint(equalTo: profilePic.heightAnchor, multiplier: Constants.profilePicAspectRatio),
+            profilePic.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: Constants.profilePicHeightRatio),
             profilePic.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             profilePic.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             //Name Label Constraints
-            nameLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor, constant: 20.0),
+            nameLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor, constant: Constants.profilePicToNameLabelSpacing),
             nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
             //Main StackView Constraints
-            mainStackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20.0),
-            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30.0),
-            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 30.0),
-            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20.0)
+            mainStackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Constants.nameLabelToMainStackViewSpacing),
+            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.mainStackViewLeadingSpacing),
+            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Constants.mainStackViewTrailingSpacing),
+            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: Constants.mainStackViewBottomSpacing)
         ])
     }
     
     func setupStatusStackView() {
         let statusLabel = UILabel(frame: .zero)
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.text = "Status"
-        statusLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        statusLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
+        statusLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        statusLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         let userStatusLabel = UILabel(frame: .zero)
+        userStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         userStatusLabel.text = "Living the dream"
-        userStatusLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        userStatusLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
+        userStatusLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        userStatusLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         statusStackView.addArrangedSubview(statusLabel)
         statusStackView.addArrangedSubview(userStatusLabel)
@@ -101,30 +139,42 @@ private extension ProfileViewController {
     
     func setupHometownStackView() {
         let hometownLabel = UILabel(frame: .zero)
-        hometownLabel.text = "Status"
-        hometownLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        hometownLabel.translatesAutoresizingMaskIntoConstraints = false
+        hometownLabel.text = "Hometown"
+        hometownLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
+        hometownLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        hometownLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let userHometownLabel = UILabel(frame: .zero)
+        userHometownLabel.translatesAutoresizingMaskIntoConstraints = false
         userHometownLabel.text = "Atlanta, GA"
-        userHometownLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        userHometownLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
+        userHometownLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        userHometownLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
-        statusStackView.addArrangedSubview(hometownLabel)
-        statusStackView.addArrangedSubview(userHometownLabel)
+        hometownStackView.addArrangedSubview(hometownLabel)
+        hometownStackView.addArrangedSubview(userHometownLabel)
     }
     
     func setupBioStackView() {
         let bioLabel = UILabel(frame: .zero)
+        bioLabel.translatesAutoresizingMaskIntoConstraints = false
         bioLabel.text = "About"
-        bioLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        bioLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
+        bioLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        bioLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let userBioLabel = UILabel(frame: .zero)
+        userBioLabel.translatesAutoresizingMaskIntoConstraints = false
         userBioLabel.text = "I love to travel and see amazing places! I have been to London, Tokyo, Sydney, and Rome. Check out the photos I have taken in my albums!"
-        userBioLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
+        userBioLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
         userBioLabel.numberOfLines = 0
         userBioLabel.lineBreakMode = .byWordWrapping //default is .byTruncatingTail
+        userBioLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        userBioLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
-        statusStackView.addArrangedSubview(bioLabel)
-        statusStackView.addArrangedSubview(userBioLabel)
+        bioStackView.addArrangedSubview(bioLabel)
+        bioStackView.addArrangedSubview(userBioLabel)
     }
 }
 
