@@ -28,13 +28,11 @@ class ProfileViewController: UIViewController {
     
     private var profilePic: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "profile_pic"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
     private var nameLabel: UILabel = {
         let label = UILabel(frame: .zero)
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "John Doe"
         label.font = UIFont.systemFont(ofSize: Constants.nameLabelSize, weight: .semibold)
         return label
@@ -42,21 +40,18 @@ class ProfileViewController: UIViewController {
     
     private var statusStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = Constants.statusStackViewSpacing
         return stackView
     }()
     
     private var hometownStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.spacing = Constants.hometownStackViewSpacing
         return stackView
     }()
     
     private var bioStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .top
         stackView.spacing = Constants.bioStackViewSpacing
         return stackView
@@ -64,7 +59,6 @@ class ProfileViewController: UIViewController {
     
     private var mainStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = Constants.mainStackViewSpacing
         return stackView
@@ -120,14 +114,12 @@ private extension ProfileViewController {
     
     func setupStatusStackView() {
         let statusLabel = UILabel(frame: .zero)
-        statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.text = "Status"
         statusLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
         statusLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         statusLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         
         let userStatusLabel = UILabel(frame: .zero)
-        userStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         userStatusLabel.text = "Living the dream"
         userStatusLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
         userStatusLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -139,14 +131,12 @@ private extension ProfileViewController {
     
     func setupHometownStackView() {
         let hometownLabel = UILabel(frame: .zero)
-        hometownLabel.translatesAutoresizingMaskIntoConstraints = false
         hometownLabel.text = "Hometown"
         hometownLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
         hometownLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         hometownLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let userHometownLabel = UILabel(frame: .zero)
-        userHometownLabel.translatesAutoresizingMaskIntoConstraints = false
         userHometownLabel.text = "Atlanta, GA"
         userHometownLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
         userHometownLabel.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -158,14 +148,12 @@ private extension ProfileViewController {
     
     func setupBioStackView() {
         let bioLabel = UILabel(frame: .zero)
-        bioLabel.translatesAutoresizingMaskIntoConstraints = false
         bioLabel.text = "About"
         bioLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .medium)
         bioLabel.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
         bioLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         
         let userBioLabel = UILabel(frame: .zero)
-        userBioLabel.translatesAutoresizingMaskIntoConstraints = false
         userBioLabel.text = "I love to travel and see amazing places! I have been to London, Tokyo, Sydney, and Rome. Check out the photos I have taken in my albums!"
         userBioLabel.font = UIFont.systemFont(ofSize: Constants.labelFontSize, weight: .light)
         userBioLabel.numberOfLines = 0
