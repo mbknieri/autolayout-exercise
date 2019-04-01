@@ -11,7 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     private var profilePic = UIImageView(image: UIImage(named: "profile_pic"))
-    private var name = UILabel(frame: .zero)
+    private var nameLabel = UILabel(frame: .zero)
     private var statusStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
         stackView.spacing = 47.0
@@ -54,7 +54,7 @@ private extension ProfileViewController {
     func setupSubviews() {
         //Add subviews
         view.addSubview(profilePic)
-        view.addSubview(name)
+        view.addSubview(nameLabel)
         view.addSubview(mainStackView)
         
         //StackView setup
@@ -66,7 +66,24 @@ private extension ProfileViewController {
         mainStackView.addArrangedSubview(hometownStackView)
         mainStackView.addArrangedSubview(bioStackView)
         
-        //TODO: Add constraints
+        //Add constraints
+        NSLayoutConstraint.activate([
+            //Profile Pic Constraints
+            profilePic.widthAnchor.constraint(equalTo: profilePic.heightAnchor, multiplier: 1.0 / 1.0),
+            profilePic.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.30),
+            profilePic.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            profilePic.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            //Name Label Constraints
+            nameLabel.topAnchor.constraint(equalTo: profilePic.bottomAnchor, constant: 20.0),
+            nameLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            //Main StackView Constraints
+            mainStackView.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 20.0),
+            mainStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30.0),
+            mainStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 30.0),
+            mainStackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: 20.0)
+        ])
     }
     
     func setupStatusStackView() {
