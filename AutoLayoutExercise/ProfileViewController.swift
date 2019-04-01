@@ -9,30 +9,45 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    private var profilePic: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "profile_pic"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
-    private var profilePic = UIImageView(image: UIImage(named: "profile_pic"))
-    private var nameLabel = UILabel(frame: .zero)
+    private var nameLabel: UILabel = {
+        let label = UILabel(frame: .zero)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "John Doe"
+        label.font = UIFont.systemFont(ofSize: 23.0, weight: .semibold)
+        return label
+    }()
+    
     private var statusStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 47.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 12.0
         return stackView
     }()
     
     private var hometownStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
-        stackView.spacing = 47.0
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 12.0
         return stackView
     }()
     
     private var bioStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.alignment = .top
-        stackView.spacing = 47.0
+        stackView.spacing = 12.0
         return stackView
     }()
     
     private var mainStackView: UIStackView = {
         let stackView = UIStackView(frame: .zero)
+        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 8.0
         return stackView
@@ -88,10 +103,12 @@ private extension ProfileViewController {
     
     func setupStatusStackView() {
         let statusLabel = UILabel(frame: .zero)
+        statusLabel.translatesAutoresizingMaskIntoConstraints = false
         statusLabel.text = "Status"
         statusLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         
         let userStatusLabel = UILabel(frame: .zero)
+        userStatusLabel.translatesAutoresizingMaskIntoConstraints = false
         userStatusLabel.text = "Living the dream"
         userStatusLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
         
@@ -101,30 +118,34 @@ private extension ProfileViewController {
     
     func setupHometownStackView() {
         let hometownLabel = UILabel(frame: .zero)
-        hometownLabel.text = "Status"
+        hometownLabel.translatesAutoresizingMaskIntoConstraints = false
+        hometownLabel.text = "Hometown"
         hometownLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         
         let userHometownLabel = UILabel(frame: .zero)
+        userHometownLabel.translatesAutoresizingMaskIntoConstraints = false
         userHometownLabel.text = "Atlanta, GA"
         userHometownLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
         
-        statusStackView.addArrangedSubview(hometownLabel)
-        statusStackView.addArrangedSubview(userHometownLabel)
+        hometownStackView.addArrangedSubview(hometownLabel)
+        hometownStackView.addArrangedSubview(userHometownLabel)
     }
     
     func setupBioStackView() {
         let bioLabel = UILabel(frame: .zero)
+        bioLabel.translatesAutoresizingMaskIntoConstraints = false
         bioLabel.text = "About"
         bioLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         
         let userBioLabel = UILabel(frame: .zero)
+        userBioLabel.translatesAutoresizingMaskIntoConstraints = false
         userBioLabel.text = "I love to travel and see amazing places! I have been to London, Tokyo, Sydney, and Rome. Check out the photos I have taken in my albums!"
         userBioLabel.font = UIFont.systemFont(ofSize: 14.0, weight: .light)
         userBioLabel.numberOfLines = 0
         userBioLabel.lineBreakMode = .byWordWrapping //default is .byTruncatingTail
         
-        statusStackView.addArrangedSubview(bioLabel)
-        statusStackView.addArrangedSubview(userBioLabel)
+        bioStackView.addArrangedSubview(bioLabel)
+        bioStackView.addArrangedSubview(userBioLabel)
     }
 }
 
